@@ -206,3 +206,32 @@ $('chapterAuto').addEventListener('click',()=>{if(chapterPlaying){stopChapterSto
 let last=0;document.addEventListener('pointermove',e=>{if(Date.now()-last<90)return;last=Date.now();const s=document.createElement('span');s.className='floaty';s.textContent=Math.random()>.5?'✦':'♡';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.fontSize='13px';s.style.animationDuration='1.5s';document.body.appendChild(s);setTimeout(()=>s.remove(),1600)});
 </script>
 </body></html>
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()"
+style="position:fixed; bottom:20px; right:20px;
+padding:12px 18px; border:none; border-radius:25px;
+background:#a855f7; color:white; font-size:16px;
+z-index:9999;">
+🎵 Play Music
+</button>
+
+<script>
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+function toggleMusic() {
+  if (music.paused) {
+    music.play().then(() => {
+      btn.textContent = "⏸ Pause Music";
+    }).catch(() => {
+      alert("Please tap Play Music again!");
+    });
+  } else {
+    music.pause();
+    btn.textContent = "🎵 Play Music";
+  }
+}
+</script>
